@@ -1,0 +1,30 @@
+version: '3'
+# Creating a network in order to attribute static IPs to the containers
+networks:
+  static-network:
+    ipam:
+      config:
+        - subnet: 192.168.200.0/24
+services:
+  web:
+    image: bash
+    volumes:
+      - ./scripts:/tmp
+      - shared_data:/data
+    depends_on:
+            - "logstash"
+    command: ["/tmp/wait_for_logstash.sh"]
+    networks:
+      static-network:
+        ipv4_address: 192.168.200.3
+
+  logstash:
+    build: .
+    networks:
+      static-network:
+        ipv4_address: 192.168.200.2
+    volumes:
+      - shared_data:/data
+# Creating a volume that will have files that can be accessed by both containers
+volumes:
+  shared_data: 
