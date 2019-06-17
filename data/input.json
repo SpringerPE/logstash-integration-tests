@@ -1,0 +1,13 @@
+{
+  "log": "example",
+  "fields": [
+    "field1",
+    "field2",
+    "field3"
+  ],
+  "expected_field_values": [
+	  "ACCESS",
+	  "B",
+	  "C"
+  ]
+}
