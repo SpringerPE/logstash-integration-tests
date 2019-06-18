@@ -6,6 +6,8 @@ import json
 ## Will create the input.log file that will be read by logstash;
 ## Will create the array of expectations in the test script.
 
+INPUT_FILE = 'data/input.json'
+
 # Credits to https://stackoverflow.com/a/31499114/10985108
 def sed_inplace(filename, pattern, repl):
     '''
@@ -30,16 +32,16 @@ def sed_inplace(filename, pattern, repl):
     shutil.move(tmp_file.name, filename)
 
 def build_output_conf(output_conf_path):
-    with open('input.json') as json_file:  
+    with open(INPUT_FILE) as json_file:  
         data = json.load(json_file)
         fields_str='fields => ['
         for f in data['fields']:
             fields_str += '\"' + f + '\", '
         fields_str = fields_str[:-2] + ']'
-        sed_inplace(output_conf_path, r'fields => \[\]', fields_str)
+        sed_inplace(output_conf_path, r'fields => \[.*', fields_str)
 
 def build_input_log(log_path):
-    with open('input.json') as json_file:  
+    with open(INPUT_FILE) as json_file:  
         data = json.load(json_file)
         f = open(log_path, 'w+')
         f.write(data['log'])
@@ -48,13 +50,13 @@ def build_input_log(log_path):
         f.close()
 
 def build_assertions(file_path):
-    with open('input.json') as json_file:  
+    with open(INPUT_FILE) as json_file:  
         data = json.load(json_file)
         expectations = 'expectations=('
         for v in data['expected_field_values']:
             expectations += '\"' + v + '\" '
         expectations += ')'
-        sed_inplace(file_path, r'expectations=\(\)', expectations)
+        sed_inplace(file_path, r'expectations=\(.*', expectations)
 
 build_output_conf('conf/output.conf')
 build_input_log('data/input.log')
