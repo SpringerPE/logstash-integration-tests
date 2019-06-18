@@ -26,7 +26,8 @@ done
 
 if [[ $ATTEMPTS -lt $MAX_ATTEMPTS ]]
 then
-  echo $(/tmp/run_tests.sh)
+  $(/tmp/run_tests.sh)
+  exit $?
 else	
   echo "FAILURE: logstash start timed out"
   exit 1

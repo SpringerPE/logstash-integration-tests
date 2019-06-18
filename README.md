@@ -42,4 +42,7 @@ failure.
 * Add your logstash filter files to the folder, alphabetically ordered;
 * Change the `data/input.json` file. 
 
+# Exit codes
 
+* `exit code 104`: File with the logstash output data was not found;
+* `exit code 105`: At least one test failed.

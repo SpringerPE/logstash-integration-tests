@@ -25,7 +25,7 @@ run_tests ()
          then
            printf "TEST $i PASSED; \n"
          else
-           error_exit "TEST FAILED: got | ${arr[$i]} |; expected | ${expectations[$i]} |"
+           error_exit "TEST FAILED: got | ${arr[$i]} |; expected | ${expectations[$i]} |" 105
          fi
       done
     done < "$INPUT"
@@ -44,7 +44,7 @@ check_if_file_exists ()
     
     if [[ $attempts -eq $max_attempts ]]
     then
-	    error_exit "FAILED: $input does not exist" 
+	    error_exit "FAILED: $INPUT does not exist" 104
     fi
 }
 
