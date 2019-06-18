@@ -11,8 +11,6 @@ MAX_ATTEMPTS=90
 ATTEMPTS=1
 INTERVAL=1
 
-$(rm -rf /data/logstash.csv)
-
 $(nc -z $IP $PORT)
 status=$?
 
@@ -26,7 +24,7 @@ done
 
 if [[ $ATTEMPTS -lt $MAX_ATTEMPTS ]]
 then
-  $(/tmp/run_tests.sh)
+  python /tmp/run_tests.py
   exit $?
 else	
   echo "FAILURE: logstash start timed out"

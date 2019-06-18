@@ -7,12 +7,16 @@ build:
 
 clean:
 	docker-compose down && \
-        docker volume rm integration_shared_data
+        docker volume rm -f logstash-integration-tests_shared_data
 .PHONY: clean
+
+python:
+	docker build docker_python/ -t bash_python
+.PHONY: python
 
 run:
 	docker-compose up
 .PHONY: test
 
 # Executes `build` and `run` stages
-all: build run
+all: build python run

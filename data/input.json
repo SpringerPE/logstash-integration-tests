@@ -1,13 +1,18 @@
-{
-  "log": "this event will be parsed by logstash",
-  "fields": [
-    "field1",
-    "field2",
-    "field3"
-  ],
-  "expected_field_values": [
-	  "field 1 is expected to have this value",
-	  "field 2 is expected to have this value",
-	  "field 3 is expected to have this value"
-  ]
-}
+[
+  {
+    "expectations": [
+      {
+        "[field1]": "Field 1 value"
+      },
+      {
+        "[nested][field]": "Nested field value"
+      }
+    ],
+    "fields": [
+      "field1",
+      "field2"
+    ],
+    "log": "log message"
+  }
+]
+
