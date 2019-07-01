@@ -19,21 +19,17 @@ After that, you will need to change the `data/input.json` field to have the data
 ## input.json example
 In the example that is commmited in this repo, we are providing logstash with an event with the value
 ```
-this event will be parsed by logstash
+log message
 ```
 
-And 3 fields:
+And 2 fields:
 ```
-field1
-field2
-field3
+[field1]
+[nested][field]
 ```
 
-When you run this project, it will change the `output.conf` file to save the processed events into a `.csv` file, but
-only keeping the 3 fields that we set in the `input.json` array.
-
-Then we have 3 expectations (the `expected_field_values` array). This expectations will be tested against the values of
-the 3 fields already mentioned. If one of them does not match, one of the scripts wwill return an error code with the
+We have 2 expectations (the `expectations` array). These expectations will be tested against the values of
+the 2 fields already mentioned. If one of them does not match, one of the scripts will return an error code with the
 failure.
 
 ## tl;dr
@@ -41,8 +37,3 @@ failure.
 * Create a `filters` folder;
 * Add your logstash filter files to the folder, alphabetically ordered;
 * Change the `data/input.json` file. 
-
-# Exit codes
-
-* `exit code 104`: File with the logstash output data was not found;
-* `exit code 105`: At least one test failed.
