@@ -15,7 +15,7 @@ python:
 .PHONY: python
 
 run:
-	docker-compose up
+	docker-compose run -v logstash-integration-tests_shared_data web
 .PHONY: test
 
 # Executes `build` and `run` stages

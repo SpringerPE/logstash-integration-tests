@@ -1,13 +1,10 @@
 # Official logstash release. Change the version accordingly
-FROM docker.elastic.co/logstash/logstash:6.6.1
+FROM docker.elastic.co/logstash/logstash:7.0.0
 
 # Creating the /data folder with the right permissions
 USER root
 RUN mkdir /data
 ADD data/input.json /data/input.json
-
-# This is needed to make sure that the file is empty before logstash sends new results to it.
-RUN echo "" > data/logstash.json
 
 # Giving the right permissions to the `/data` folder so that logstash can write there
 RUN chown -R logstash:logstash /data

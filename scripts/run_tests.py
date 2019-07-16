@@ -50,9 +50,9 @@ def test_event(ev, logstash_results):
                         print "PASS: " + field + ' | ' + value
                     else:
                         if field in fields:
-                            sys.exit('TEST FAILED: expected |' + value + '| got |' + fields[field] + '|')
+                            sys.exit('TEST FAILED: expected |' + value + '| got |' + fields[field] + '|. Source event: |' + log + '|')
                         else:
-                            sys.exit('TEST FAILED: field |' + field + '| was expected but was not found!')
+                            sys.exit('TEST FAILED: field |' + field + '| was expected but was not found! Source event: |' + log + '|')
 
 
 # Runs the tests that are defined in the `input.json` file.
